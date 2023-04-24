@@ -1,41 +1,40 @@
-
+//Binary_Search
 #include <iostream>
 using namespace std;
 struct Array
 {
- int *A;
- int size;
- int length;
+  int *A;
+  int size;
+  int length;
 };
-//Display the array
+
 void Display(struct Array arr)
 {
-    cout<<"Elements are : " ;
- for(int i=0;i<arr.length ; i++)
- {
-    cout<<arr.A[i]<<" ";
- }
-  cout<<endl;
+    for(int i=0;i<arr.length;i++)
+    {
+        cout<<arr.A[i]<<" ";
+    }
 }
-
-//Binary Search 
 
 int Binary_Search(struct Array arr,int key)
 {
-    int low, mid , high;
-    low =0 ;
-    high = arr.length -1 ;
-    while(low<=high)
+    int low ;
+    int high;
+    int mid;
+    low = 0;
+    high = arr.length -1;
+    while(low <= high)
     {
-        mid = (low + high)/2 ;
+        mid = (low+high)/2 ;
         if(key == arr.A[mid])
-         return mid;
-        else if(key < arr.A[mid])
-         high = mid -1 ;
-        else 
-         low = mid + 1;
-    }
-    return -1 ;
+        {
+            return mid ;
+        }else if (key < arr.A[mid])
+        {
+            high = mid-1;
+        }else
+          low = mid + 1 ;
+    }return -1 ;
 }
 
 int RBinSearch(int a[],int l, int h,int key)
@@ -53,27 +52,89 @@ int RBinSearch(int a[],int l, int h,int key)
     return -1;
 }
 
-
-
+int Get(struct Array arr,int index)
+{
+    if(index >=0 && index < arr.length)
+    {
+        return arr.A[index] ;
+    }
+    return -1;
+}
+ void Set(struct Array *arr ,int index,int x )
+ {
+     if(index >=0 && index < arr-> length)
+     {
+         arr->A[index] = x ;
+     }
+ }
+ 
+ int Max(struct Array arr)
+ {
+     int max = arr.A[0];
+     for(int i=1 ;i<arr.length ;i++)
+     {
+         if(arr.A[i] > max)
+          max = arr.A[i];
+     }
+     return max;
+ }
+ 
+ int Min(struct Array arr)
+ {
+     int min = arr.A[0];
+     for(int i=1;i<arr.length ; i++)
+     {
+         if(arr.A[i] < min )
+          min = arr.A[i];
+     }
+     return min;
+ }
+ 
+ int Sum(struct Array arr)
+ {
+     int sum = 0;
+     for(int i=0;i<arr.length;i++)
+     {
+         sum += arr.A[i]; 
+     }
+     return sum;
+ }
+ 
+ float Average(struct Array arr)
+ {
+     return (float)Sum(arr)/(arr.length);
+ }
 
 int main()
 {
-    int i,n;
     struct Array arr1;
-    arr1.size = 10;
+    int i;
+    int n;
+    cout<<"Enter the size of array"<<endl;
+    cin>> arr1.size ;
     arr1.A = new int[arr1.size];
-    cout<<"Enter number of inputs"<<endl;
-    cin>>n;
-    cout<<"Enter the elements"<<endl;
-    for(i=0 ;i<n ;i++)
+    cout<<"Enter the number of elements"<<endl;
+    cin >> n;
+    cout<<"enter the elements"<<endl;
+    for(i = 0;i<n;i++)
     {
-        cin>>arr1.A[i];
+        cin >> arr1.A[i];
     }
-    arr1.length = n ;
-
+    arr1.length = n;
+    cout<< "elements are : ";
     Display(arr1);
-    cout << Binary_Search(arr1,16)<<endl;
-    cout<<RBinSearch(arr1.A,0,arr1.length,10)<<endl;
-
+    cout<<endl;
+    //cout<< Binary_Search(arr1,5)<<endl;
+    //cout<<RBinSearch(arr1.A,0,arr1.length,10)<<endl;
+    cout<<Get(arr1,4)<<endl;
+    Set(&arr1,0,15);
+    Display(arr1);
+    cout<<endl;
+    cout<<Max(arr1)<<endl;
+    cout<<Min(arr1)<<endl;
+    cout<<Sum(arr1)<<endl;
+    cout<<Average(arr1)<<endl;
     return 0;
+    
 }
+
