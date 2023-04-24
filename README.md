@@ -38,7 +38,20 @@ int Binary_Search(struct Array arr,int key)
     return -1 ;
 }
 
-
+int RBinSearch(int a[],int l, int h,int key)
+{
+    if(l<=h)
+    {
+        int mid = (l+h)/2;
+        if(key == a[mid])
+         return mid;
+        else if(key < a[mid])
+         return RBinSearch(a, l , mid-1 ,key);
+        else
+         return RBinSearch(a, mid+1 ,h ,key);
+    }
+    return -1;
+}
 
 
 
@@ -60,7 +73,7 @@ int main()
 
     Display(arr1);
     cout << Binary_Search(arr1,16)<<endl;
-    
+    cout<<RBinSearch(arr1.A,0,arr1.length,10)<<endl;
 
     return 0;
 }
