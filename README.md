@@ -7,6 +7,13 @@ struct Array
   int size;
   int length;
 };
+void Swap(int *x , int *y)
+{
+    int temp ;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
 
 void Display(struct Array arr)
 {
@@ -104,6 +111,28 @@ int Get(struct Array arr,int index)
  {
      return (float)Sum(arr)/(arr.length);
  }
+ 
+ void Reverse(struct Array *arr)
+ {
+     int *B ;
+     int i,j;
+     B = new int[arr->length];
+     for(i = arr->length-1 , j = 0 ; i >=0  ; i--,j++)
+     {
+         B[j] = arr->A[i];
+     }
+     
+     for(i = 0 ;i < arr->length ;i++)
+     {
+         arr->A[i] = B[i];
+     }
+ }
+ void Reverse2(struct Array *arr)
+ {
+     int i,j;
+     for(i=0,j = arr->length-1; i<j;i++,j--)
+     Swap(&arr->A[i],&arr->A[j]);
+ }
 
 int main()
 {
@@ -126,14 +155,18 @@ int main()
     cout<<endl;
     //cout<< Binary_Search(arr1,5)<<endl;
     //cout<<RBinSearch(arr1.A,0,arr1.length,10)<<endl;
-    cout<<Get(arr1,4)<<endl;
-    Set(&arr1,0,15);
+    //cout<<Get(arr1,4)<<endl;
+    //Set(&arr1,0,15);
+    //Display(arr1);
+    //cout<<endl;
+    //cout<<Max(arr1)<<endl;
+    //cout<<Min(arr1)<<endl;
+    //cout<<Sum(arr1)<<endl;
+    //cout<<Average(arr1)<<endl;
+    //Reverse(&arr1);
+    Reverse2(&arr1);
+    cout<<"Reversed array : " ;
     Display(arr1);
-    cout<<endl;
-    cout<<Max(arr1)<<endl;
-    cout<<Min(arr1)<<endl;
-    cout<<Sum(arr1)<<endl;
-    cout<<Average(arr1)<<endl;
     return 0;
     
 }
