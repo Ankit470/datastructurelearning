@@ -133,26 +133,200 @@ int Get(struct Array arr,int index)
      for(i=0,j = arr->length-1; i<j;i++,j--)
      Swap(&arr->A[i],&arr->A[j]);
  }
+ 
+ struct Array MergeArray(struct Array *arr1 , struct Array *arr2)
+ {
+     struct Array arr3;
+     arr3.size = arr1->size + arr2->size ;
+     arr3.length = arr1->length + arr2->length;
+     arr3.A = new int[arr3.size];
+     
+     int i= 0 ,j = 0,k = 0;
+     while(i <arr1->length && j < arr2->length)
+     {
+      if(arr1->A[i] < arr2->A[j])
+      {
+          arr3.A[k++] = arr1->A[i++];
+      }
+      else
+      {
+          arr3.A[k++] = arr2->A[j++];
+      }
+     }
+     
+     for( ;i < arr1->length;i++)
+     {
+         arr3.A[k++] = arr1->A[i];
+     }
+     for( ;j<arr2->length ; j++)
+     {
+         arr3.A[k++] = arr2->A[j];
+     }
+     
+     return arr3;
+ }
+ 
+ struct Array Union(struct Array *arr1 , struct Array *arr2)
+ {
+     struct Array arr3;
+     arr3.size = arr1->size + arr2->size ;
+     
+     arr3.A = new int[arr3.size];
+     
+     int i= 0 ,j = 0,k = 0;
+     while(i <arr1->length && j < arr2->length)
+     {
+      if(arr1->A[i] < arr2->A[j])
+      {
+          arr3.A[k++] = arr1->A[i++];
+      }
+      else if(arr2->A[j]< arr1->A[i])
+      {
+          arr3.A[k++] = arr2->A[j++];
+      }
+      else
+      {
+          arr3.A[k++] = arr1->A[i++];
+          j++;
+      }
+     }
+     
+     for( ;i < arr1->length;i++)
+     {
+         arr3.A[k++] = arr1->A[i];
+     }
+     for( ;j<arr2->length ; j++)
+     {
+         arr3.A[k++] = arr2->A[j];
+     }
+     
+     arr3.length = k;
+     
+     return arr3;
+ }
+ 
+ struct Array Intersection(struct Array *arr1 , struct Array *arr2)
+ {
+     struct Array arr3;
+     arr3.size = arr1->size + arr2->size ;
+     
+     arr3.A = new int[arr3.size];
+     
+     int i= 0 ,j = 0,k = 0;
+     while(i <arr1->length && j < arr2->length)
+     {
+      if(arr1->A[i] < arr2->A[j])
+      {
+          i++;
+      }
+      else if(arr2->A[j]< arr1->A[i])
+      {
+          j++;
+      }
+      else if(arr1->A[i] = arr2->A[j]) // it is optiona to write this condition
+      {
+          arr3.A[k++] = arr1->A[i++];
+          j++;
+      }
+     }
+     
+     //do not copy remaining elements 
+     
+     arr3.length = k;
+     
+     return arr3;
+ }
+ 
+ struct Array DifferenceArray(struct Array *arr1 , struct Array *arr2)
+ {
+     struct Array arr3;
+     arr3.size = arr1->size + arr2->size ;
+     arr3.length = arr1->length + arr2->length;
+     arr3.A = new int[arr3.size];
+     
+     int i= 0 ,j = 0,k = 0;
+     while(i <arr1->length && j < arr2->length)
+     {
+      if(arr1->A[i] < arr2->A[j])
+      {
+          arr3.A[k++] = arr1->A[i++];
+      }
+      else if(arr2->A[j]< arr1->A[i])
+      {
+          j++;
+      }
+      else if(arr1->A[i] = arr2->A[j]) // it is optiona to write this condition
+      {
+          i++;
+          j++;
+      }
+     }
+     
+     
+     //do not copy remaining elements of arr2
+     
+     for( ;i< arr1->length ;i++)
+     {
+         arr3.A[k++] = arr1->A[i];
+     }
+     
+     arr3.length = k;
+     
+     return arr3;
+ }
+ 
 
 int main()
 {
-    struct Array arr1;
+    struct Array arr1,arr2;
+    struct Array arr3;
     int i;
-    int n;
-    cout<<"Enter the size of array"<<endl;
+    /*cout<<"Enter the size of array"<<endl;
     cin>> arr1.size ;
     arr1.A = new int[arr1.size];
     cout<<"Enter the number of elements"<<endl;
-    cin >> n;
-    cout<<"enter the elements"<<endl;
-    for(i = 0;i<n;i++)
+    cin >> n; */
+    arr1.size = 10 ;
+    arr2.size = 10;
+    
+    arr1.A = new int[arr1.size];
+    arr2.A = new int[arr2.size];
+    arr1.length = 5;
+    arr2.length = 5;
+    
+    cout<<"enter the elements into arr1"<<endl;
+    for(i = 0;i<arr1.length;i++)
     {
         cin >> arr1.A[i];
     }
-    arr1.length = n;
-    cout<< "elements are : ";
+    
+    cout<<"Enter the elements into arr2"<<endl;
+    for(i =0 ;i<arr2.length ;i++)
+    {
+        cin >>arr2.A[i];
+    }
+    
+    
+    cout<< "elements into arr1 : ";
     Display(arr1);
     cout<<endl;
+    cout<<"Elements into arr2 : ";
+    Display(arr2);
+    cout<<endl;
+    
+    //arr3 = MergeArray(&arr1,&arr2);
+    //cout<<endl;
+    //Display(arr3);
+    //cout<<endl;
+    
+    //arr3 = Union(&arr1,&arr2);
+    //arr3 = Intersection(&arr1,&arr2);
+    arr3 = DifferenceArray(&arr1,&arr2);
+    
+    Display(arr3);
+    cout<<endl;
+    
+    
     //cout<< Binary_Search(arr1,5)<<endl;
     //cout<<RBinSearch(arr1.A,0,arr1.length,10)<<endl;
     //cout<<Get(arr1,4)<<endl;
@@ -164,10 +338,9 @@ int main()
     //cout<<Sum(arr1)<<endl;
     //cout<<Average(arr1)<<endl;
     //Reverse(&arr1);
-    Reverse2(&arr1);
-    cout<<"Reversed array : " ;
-    Display(arr1);
+    //Reverse2(&arr1);
+    //cout<<"Reversed array : " ;
+    //Display(arr1);
     return 0;
     
 }
-
