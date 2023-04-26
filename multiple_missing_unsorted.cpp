@@ -1,5 +1,5 @@
-//include variable low and high in the array ...
 
+//multiple missing element from unsorted array 
 #include <iostream>
 using namespace std;
 
@@ -10,13 +10,37 @@ struct Array
     int length;
 };
 
+int Low(struct Array arr)
+{
+    int low = arr.A[0] ;
+    for(int i=1;i< arr.length ;i++)
+    {
+        if(low > arr.A[i])
+        {
+            low =  arr.A[i];
+        }
+    }
+    return low ;
+}
+
+int High(struct Array arr)
+{
+    int high = arr.A[0];
+    for(int i=1;i< arr.length;i++)
+    {
+        if(arr.A[i] > high)
+        high = arr.A[i];
+    }
+    return high;
+}
+
 void Unsort_Missing(struct Array arr)
 {
-    int low = 1;
-    int high = 12;
+    int new_high = High(arr);
+    int new_low = Low(arr);
     
-    int A[high];
-    for(int i=0;i<high;i++)
+    int A[new_high];
+    for(int i=0;i<new_high;i++)
     {
         A[i] = 0;
     }
@@ -26,7 +50,7 @@ void Unsort_Missing(struct Array arr)
         A[arr.A[i]]++ ; 
     }
     
-    for(int i=low ;i <= high ;i++)
+    for(int i=new_low ;i <= new_high ;i++)
     {
         if(A[i] ==0)
         {
