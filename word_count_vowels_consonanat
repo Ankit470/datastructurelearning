@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    
+   char s[] ="WElCoME%";
+   int i;
+   int Vcount =0;
+   int Ccount =0;
+   int Wcount = 0;
+   for(i=0; s[i] != '\0' ; i++)
+   {
+      if(s[i] ==' ')
+      Wcount++;
+      if(s[i] == 'a' ||s[i] == 'e' ||s[i] == 'i' ||s[i] == 'o' ||s[i] == 'u' ||
+         s[i] == 'A' ||s[i] == 'E' ||s[i] == 'I' ||s[i] == 'O' ||s[i] == 'U')
+         {
+             Vcount++;
+         }
+      else if((s[i] >= 65 && s[i] <=90) || (s[i] >= 97 && s[i] <= 122))
+       {
+           Ccount++;
+       }
+       
+   }
+   
+   cout << s << endl;
+   
+   cout <<"vowels---> "<<Vcount <<endl;
+   cout << "consonant---> "<<Ccount <<endl;
+   cout<< "words----->" << Wcount+1<<endl;
+    return 0;
+}
