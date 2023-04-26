@@ -1,0 +1,66 @@
+//find the duplicates elements : using hash in unordered array 
+#include <iostream>
+using namespace std;
+
+
+struct Array 
+{
+    int *A;
+    int size;
+    int length;
+};
+
+int Max(struct Array arr)
+{
+    int max = arr.A[0];
+    for(int i=0;i< arr.length ;i++)
+    {
+        if(max < arr.A[i])
+        {
+            max = arr.A[i];
+        }
+    }
+    return max;
+}
+
+
+void Finding_Pair(struct Array arr,int sum)
+{
+    
+    int new_max = Max(arr);
+    int B[new_max];
+    for(int i=1;i<= new_max ;i++)
+    {
+        B[i] = 0;
+    }
+    
+    for(int i=0 ;i< arr.length ;i++)
+    {
+        {
+            if(B[sum - arr.A[i]] == 0 && arr.A[i] != sum - arr.A[i] )
+            {
+                cout <<arr.A[i] << "+" << sum - arr.A[i] <<"=" <<sum <<endl;
+            }
+            B[arr.A[i]]++;
+        }
+    }
+}
+
+int main()
+{
+    struct Array arr1;
+    arr1.size = 10;
+    arr1.length = 9;
+    
+    arr1.A = new int[arr1.length];
+    
+    cout<<"enter the elements "<<endl;
+    for(int i=0;i< arr1.length; i++)
+    {
+        cin >>arr1.A[i];
+    }
+    cout<<endl;
+    Finding_Pair(arr1,10);
+    
+    return 0;
+}
