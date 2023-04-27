@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    char name1[] = "Ankit";
+    char name2[] = "Ankot";
+    int i,j;
+    
+    for(i=0,j=0; name1[i] !='\0' && name2[j] !='\0';i++,j++)
+    {
+        if(name1[i] != name2[j])
+        break;
+    }
+    if(name1[i] == name2[j])
+    cout<<"Equal String "<<endl;
+    else if(name1[i] < name2[j])
+    cout<<"smaller";
+    else
+    cout<<"Greater"<<endl;
+    
+    return 0;
+}
