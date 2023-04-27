@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    char name[] = "Ankit";
+    int i,j;
+    char a;
+    
+    for(j=0;name[j] !='\0';j++)
+    {
+        
+    }
+    j = j-1;
+    for(j,i=0 ; i<j;j--,i++)
+    {
+        a = name[i];
+        name[i] = name[j];
+        name[j] = a;
+    }
+    cout<<name<<endl;
+    
+    return 0;
+}
