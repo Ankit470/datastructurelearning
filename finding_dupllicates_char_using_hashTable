@@ -1,0 +1,30 @@
+//finding duplicates using hash-table
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    char A[]="aabbcdefgghijkl";
+    int H[26];
+    int i,j;
+    for(int i=0;i<26;i++)
+    {
+        H[i] = 0;
+    }
+    for(j=0;A[j] !='\0';j++)
+    {
+        H[A[j]-96]++;
+    }
+    for(i=0;i<26;i++)
+    {
+        if(H[i] >1)
+        {
+            cout<<char(i+97)<<"--->";
+            cout<<H[i]<<endl;
+        }
+    }
+    
+    
+    return 0;
+}
