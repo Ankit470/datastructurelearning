@@ -1,0 +1,21 @@
+//finding duplicates
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    char A[]="aabbcdefgghijkl";
+    char last_duplicate = '\0';
+    int i;
+    for(i =0; A[i] !='\0' ; i++)
+    {
+        if(A[i] == A[i+1] && A[i] != last_duplicate)
+        {
+            cout<<A[i] <<" ";
+            last_duplicate = A[i];
+        }
+    }
+    
+    return 0;
+}
